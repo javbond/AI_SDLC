@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(head:*)",
+      "Bash(xargs:*)",
+      "Bash(chmod:*)",
+      "Bash(gh *)",
+      "Bash(git *)",
+      "Bash(mvn *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(ng *)",
+      "Bash(java *)",
+      "Bash(docker *)",
+      "Bash(mkdir *)",
+      "Bash(ls *)",
+      "Bash(python3 *)",
+      "Bash(bash scripts/*)",
+      "WebFetch(domain:discuss.ai.google.dev)"
+    ]
+  }
+}
