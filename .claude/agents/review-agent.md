@@ -7,6 +7,13 @@ disallowedTools:
   - Edit
   - Bash
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Review code in ALL workspace directories listed in state.json.
+Apply the correct code patterns for each workspace's technology.
+For non-default stacks, read reference docs in `docs/tech-refs/`.
 
 # Enterprise Code Review Agent
 

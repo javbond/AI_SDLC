@@ -10,6 +10,14 @@ allowedTools:
   - Grep
   - Bash
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Your Spring Boot / Java rules apply ONLY to the `backend/` directory.
+If additional workspaces exist (see state.json → techStack.additional), be aware of them for integration points.
+When implementing cross-workspace communication, define contracts in `docs/tech-specs/shared-schemas/`.
+If importedDocs exist, read the extracted .md versions before generating new code.
 
 # Enterprise Backend Developer Agent (Spring Boot + DDD)
 

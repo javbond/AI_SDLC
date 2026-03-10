@@ -8,6 +8,12 @@ allowedTools:
   - Glob
   - Grep
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Include full tech stack from state.json → techStack in sprint summaries.
+Track progress across ALL workspaces, not just backend/frontend.
 
 # Memory & Context Compression Agent
 

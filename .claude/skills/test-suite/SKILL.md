@@ -297,6 +297,32 @@ Next Steps:
 
 ---
 
+
+## Multi-Stack Testing
+
+### Workspace-Aware Test Execution
+Read `.claude/rules/06-tech-stack-context.md` and `.sdlc/state.json → techStack`.
+
+When running `/test-suite all`, iterate ALL configured workspaces:
+1. **Primary backend**: Use `techStack.primary.backend.testCmd` (e.g., `mvn test`)
+2. **Primary frontend**: Use `techStack.primary.frontend.testCmd` (e.g., `ng test`)
+3. **Additional workspaces**: For each entry in `techStack.additional`, run `testCmd` in the workspace's `directory`
+   - Example: Go workspace → `cd workspaces/go-data-plane && go test ./...`
+   - Example: Rust workspace → `cd workspaces/rust-worker && cargo test`
+
+### Coverage per Workspace
+Report coverage separately for each workspace in the test report:
+```markdown
+| Workspace | Type | Total | Passed | Failed | Coverage |
+|-----------|------|-------|--------|--------|----------|
+| backend (Spring Boot) | Unit | [N] | [N] | [N] | [X]% |
+| frontend (Angular) | Unit | [N] | [N] | [N] | [X]% |
+| go-data-plane (Go) | Unit | [N] | [N] | [N] | [X]% |
+```
+
+### Cross-Workspace Integration Tests
+If shared contracts exist in `docs/tech-specs/shared-schemas/`, generate integration tests that verify cross-workspace communication (e.g., backend ↔ Go service via gRPC).
+
 ## Agent Delegation
 
 This skill delegates to the **QA Agent** (`.claude/agents/qa-agent.md`).

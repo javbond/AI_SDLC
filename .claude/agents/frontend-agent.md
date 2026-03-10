@@ -10,6 +10,14 @@ allowedTools:
   - Grep
   - Bash
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Your Angular / frontend rules apply ONLY to the `frontend/` directory.
+If additional workspaces exist, be aware of their APIs for integration.
+Read reference docs in `docs/tech-refs/` for non-default tech stack conventions.
+If importedDocs exist, read the extracted .md versions for design context.
 
 # Angular Enterprise Frontend Developer Agent
 

@@ -10,6 +10,13 @@ allowedTools:
   - Grep
   - Bash
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Run tests for ALL configured workspaces, not just backend/ and frontend/.
+Read state.json → techStack.additional for workspace-specific test commands.
+Each workspace has its own testCmd — use the correct one for each directory.
 
 # Enterprise QA & Test Agent
 

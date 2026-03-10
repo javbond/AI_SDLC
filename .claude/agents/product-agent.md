@@ -10,6 +10,13 @@ allowedTools:
   - Grep
   - AskUserQuestion
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Check importedDocs in state.json — use imported documents as REFERENCE (not as comprehensive/complete).
+If imported PRD or requirements exist, read the extracted .md as a starting point, then ensure comprehensiveness by asking relevant questions using AskUserQuestion.
+Read `docs/tech-refs/` for existing project context.
 
 # Enterprise Product Requirements (PRD) Agent
 

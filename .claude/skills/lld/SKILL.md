@@ -21,6 +21,29 @@ You are a Senior Software Designer. Generate implementation-ready low-level desi
 ## Context — PRD
 !`cat docs/prd/prd.md 2>/dev/null | head -50 || echo "PRD not found."`
 
+
+## Multi-Stack & Imported Design Context
+
+### Before Designing: Check Existing Material
+1. **Imported LLD docs**: If `docs/architecture/lld/` already contains files with `<!-- IMPORTED -->` markers, read them and fill gaps
+2. **Reference docs**: Check `docs/tech-refs/` for class diagrams, sequence diagrams, or API contracts from imported guides
+3. **Ask questions** for any missing details — use `AskUserQuestion` to confirm entity relationships, API contract details, etc.
+
+### Multi-Stack Package Structure
+Read `.claude/rules/06-tech-stack-context.md` and `.sdlc/state.json → techStack`.
+
+**The Package Structure section MUST cover ALL configured stacks:**
+- Primary backend package structure (e.g., Spring Boot DDD layers) — only if Java/Spring Boot is selected
+- Primary frontend structure (e.g., Angular feature modules) — only if Angular is selected
+- Additional workspace structures based on their technology (e.g., Go package layout, Rust crate structure)
+- Consult `docs/tech-refs/<workspace>/` for workspace-specific patterns and conventions
+
+### Cross-Workspace Contracts
+If additional workspaces exist:
+- API contracts must cover cross-workspace communication (gRPC protos, REST APIs between workspaces)
+- Sequence diagrams must include cross-workspace flows
+- Shared data models in `docs/tech-specs/shared-schemas/`
+
 ## Arguments
 - `$1` = Project name
 

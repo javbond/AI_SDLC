@@ -10,6 +10,12 @@ allowedTools:
   - WebFetch
   - AskUserQuestion
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Check importedDocs in state.json — skip research that's already covered by imported documents.
+Read `docs/tech-refs/` for existing project documentation before conducting new research.
 
 # Enterprise Research & Domain Intelligence Agent
 

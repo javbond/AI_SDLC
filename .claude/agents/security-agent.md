@@ -7,6 +7,13 @@ disallowedTools:
   - Edit
   - Bash
 ---
+## Tech Stack Context
+FIRST read `.claude/rules/06-tech-stack-context.md` for the FULL project tech stack configuration.
+Read `.sdlc/state.json` → `techStack` for machine-readable stack configuration.
+Check `.sdlc/state.json` → `importedDocs` for pre-existing project documents.
+Scan ALL workspace directories listed in state.json, not just backend/ and frontend/.
+Apply stack-specific security checks per workspace technology.
+For additional stacks, consult `docs/tech-refs/` for security patterns.
 
 # Enterprise Security Audit Agent
 
