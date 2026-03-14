@@ -10,19 +10,19 @@ user-invocable: true
 You are a Full-Stack Development Lead. You coordinate implementation of user stories across frontend, backend, and API layers following DDD architecture, Java design patterns, and secure coding practices.
 
 ## Current SDLC State
-!`python3 -c 'import json; s=json.load(open(".sdlc/state.json")); print("Project: " + s.get("project","?") + "  |  Phase: " + s.get("currentPhase","?") + "  |  Sprints: " + str(len(s.get("sprints",[]))))' 2>/dev/null || echo "Project: Not initialized"`
+!`python3 -c 'import json; s=json.load(open(".sdlc/state.json")); print("Project: " + s.get("project","?") + "  |  Phase: " + s.get("currentPhase","?") + "  |  Sprints: " + str(len(s.get("sprints",[]))))' 2>/dev/null || echo Project: Not initialized`
 
 ## Context — Architecture
-!`ls docs/architecture/lld/ 2>/dev/null && echo "---" && ls docs/architecture/hld/ 2>/dev/null || echo "No architecture docs found. Run /hld and /lld first."`
+!`ls docs/architecture/lld/ 2>/dev/null && echo --- && ls docs/architecture/hld/ 2>/dev/null || echo No architecture docs found. Run /hld and /lld first.`
 
 ## Context — DDD
-!`ls docs/ddd/ 2>/dev/null || echo "No DDD artifacts."`
+!`ls docs/ddd/ 2>/dev/null || echo No DDD artifacts.`
 
 ## Context — Tech Specs
-!`ls docs/tech-specs/ 2>/dev/null || echo "No tech specs."`
+!`ls docs/tech-specs/ 2>/dev/null || echo No tech specs.`
 
 ## Context — Current Sprint
-!`ls docs/sprints/ 2>/dev/null | tail -1 || echo "No sprint plans."`
+!`ls docs/sprints/ 2>/dev/null | tail -1 || echo No sprint plans.`
 
 ## Arguments
 - `$1` = Layer: `frontend`, `backend`, or `api`
@@ -216,6 +216,45 @@ Generate the API contract implementation:
 ---
 
 
+---
+
+### `/develop workspace [workspace-name] [user-story]`
+
+Implement code in an **additional workspace** (non-primary tech stack).
+
+#### Step 1: Resolve Workspace Config
+Read `.sdlc/state.json` → `techStack.additional` to find the matching workspace:
+```bash
+python3 -c "
+import json
+with open('.sdlc/state.json') as f:
+    state = json.load(f)
+for ws in state.get('techStack', {}).get('additional', []):
+    if ws.get('name','').lower().replace(' ','-') == '[workspace-name]'.lower():
+        print(f'Directory: {ws["directory"]}')
+        print(f'Technology: {ws["technology"]} {ws["version"]}')
+        print(f'Language: {ws["language"]}')
+        print(f'Build: {ws["buildCmd"]}')
+        print(f'Test: {ws["testCmd"]}')
+        print(f'Reference: {ws.get("referenceDoc", "none")}')
+"
+```
+
+#### Step 2: Read Reference Documentation
+If the workspace has a `referenceDoc` in state.json, READ it thoroughly before implementing:
+- Reference docs in `docs/tech-refs/<workspace>/` contain architecture patterns, coding conventions, and implementation guidance
+- These docs are REFERENCE material — use them to understand the workspace's patterns but ensure completeness by consulting the project's HLD/LLD/DDD artifacts
+
+#### Step 3: Implement
+Follow the workspace's technology conventions (from reference docs and 06-tech-stack-context.md).
+- Use the workspace's build command to verify: `[buildCmd]`
+- Use the workspace's test command to verify: `[testCmd]`
+- Respect the workspace's language idioms and patterns
+
+#### Step 4: Integration Points
+Check `docs/tech-specs/shared-schemas/` for cross-workspace contracts (gRPC protos, OpenAPI specs, Kafka topic schemas).
+Ensure the workspace implementation adheres to these shared contracts.
+
 ### After Implementation
 
 0. **Commit and push work**:
@@ -287,6 +326,17 @@ This skill delegates to the **Backend Agent** or **Frontend Agent** based on the
 ### `/develop api` → Backend Agent
 Same as `/develop backend` but focused on controller + DTO layer.
 
+
+### `/develop workspace <name>` → Dynamic Agent
+- Reads `state.json → techStack.additional` for workspace config
+- If workspace technology has a matching agent (e.g., backend-agent for Spring Boot), use it
+- Otherwise, use a general-purpose agent with the workspace's reference docs as context
+- Agent is given: workspace directory, build/test commands, reference doc path, shared contracts
+
+### Multi-Stack Awareness
+Read `.claude/rules/06-tech-stack-context.md` for the full project tech stack.
+When implementing in any workspace, be aware of integration points with other workspaces.
+Check `docs/tech-specs/shared-schemas/` for cross-workspace contracts.
 
 ### When using Agent Teams (recommended for parallel development):
 Use `/build-with-agent-team` to run Backend + Frontend agents in parallel:
