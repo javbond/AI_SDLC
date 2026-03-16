@@ -3,13 +3,10 @@
 An AI-powered Software Development Lifecycle factory built on Claude Code. Transforms Claude Code into a complete software development team using orchestrated skills, enforced quality gates, and real-world Agile/Scrum methodology.
 
 ## Tech Stack
-- **Frontend**: Angular 17+ (standalone components, NgRx, lazy loading)
-- **Backend**: Spring Boot 3.x (Java 17+, DDD architecture)
-- **Database**: PostgreSQL (primary), Redis (cache)
-- **Messaging**: Kafka / RabbitMQ (event-driven)
-- **Search**: Elasticsearch
-- **VCS**: GitHub + GitHub Projects
-- **Architecture**: Domain-Driven Design (DDD)
+Configured per project. See `.claude/rules/06-tech-stack-context.md` for current project stacks.
+See `.sdlc/state.json` → `techStack` for machine-readable configuration.
+Default options include Angular 17+, Spring Boot 3.x, Go, Rust, Node.js, and more.
+Architecture: Domain-Driven Design (DDD) by default.
 
 ## Available Skills
 
@@ -34,6 +31,7 @@ An AI-powered Software Development Lifecycle factory built on Claude Code. Trans
 | 4. DDD | `/ddd-architect [domain]` | Bounded contexts, aggregates, domain events |
 | 4. Tech Specs | `/tech-specs [project] [stack]` | DB schemas, OpenAPI specs, workflows |
 | 5. Sprint | `/scrum-sprint [action]` | Sprint planning, progress, review, retro |
+| 5. Sprint Build | `/sprint-build [mode]` | Build all sprint stories sequentially or in parallel, auto-test, auto-UAT |
 | 5. Development | `/develop [layer] [story]` | Frontend/backend/API implementation |
 | 6. Testing | `/test-suite [type]` | Unit, integration, E2E, coverage |
 | 6. TDD | `/tdd-helper` | Test-driven development guidance |
@@ -87,9 +85,16 @@ Use Agent Teams for parallel execution with tmux split-pane visibility:
 - @.claude/rules/03-java-patterns.md
 - @.claude/rules/04-angular-patterns.md
 - @.claude/rules/05-security.md
+- @.claude/rules/06-tech-stack-context.md (auto-generated — project tech stack)
 
 ## SDLC State
 Current project state is tracked in `.sdlc/state.json`. All phase artifacts are stored in `docs/`.
+
+## Imported Documents
+Imported project documents are tracked in `.sdlc/state.json` → `importedDocs`.
+Original files are preserved in `docs/tech-refs/`. Extracted text versions end with `-extracted.md`.
+Imported documents serve as REFERENCE — they are starting points, not final artifacts.
+All agents check importedDocs to leverage existing project context.
 
 ## Key Directories
 | Directory | Purpose |
@@ -101,6 +106,9 @@ Current project state is tracked in `.sdlc/state.json`. All phase artifacts are 
 | `.claude/skills/` | Project-specific SDLC skills |
 | `.claude/rules/` | Coding standards and conventions |
 | `.claude/hooks/` | Agent team event hooks (TaskCompleted, TeammateIdle) |
+| `workspaces/` | Additional tech stack workspaces (Go, Rust, etc.) |
+| `docs/tech-refs/` | Reference docs for all tech stacks |
+| `docs/tech-specs/shared-schemas/` | Cross-workspace contracts (gRPC, OpenAPI) |
 
 ## Git Workflow (GitHub Flow)
 - Branch from `main`, merge back via PR — no `develop` or `release` branches
